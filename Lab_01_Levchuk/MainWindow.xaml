@@ -3,10 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Lab_01_Levchuk"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:ViewModels="clr-namespace:Lab_01_Levchuk.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="400" Width="800">
+    <Window.DataContext>
+        <ViewModels:MainVM />
+    </Window.DataContext>
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DatePicker  Grid.Row="0" Grid.Column="0"
+                                       Grid.RowSpan="2"
+                    Width="200" Height="200" Margin="20" SelectedDate="{Binding ChosenDate, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button x:Name="button1"  Grid.Row="2" Grid.Column="0"
+                Width="200" Height="50" VerticalAlignment="Top" Margin="20" FontSize="14" FontFamily="Verdana" Content="Get some info from&#xa;   your birth date" Command="{Binding ButtonCommand}" />
+        <TextBlock  Grid.Row="0" Grid.Column="1" Width="350" Height="80" FontSize="18" FontFamily="Verdana" Text="{Binding AgeInfo, Mode=OneWay}"/>
+        <TextBlock  Grid.Row="1" Grid.Column="1" Width="350" Height="100" FontSize="18" FontFamily="Verdana" Text="{Binding WesternZodiacInfo, Mode=OneWay}" />
+        <TextBlock  Grid.Row="2" Grid.Column="1" Width="350" Height="100" FontSize="18" FontFamily="Verdana" Text="{Binding ChineseZodiacInfo, Mode=OneWay}"/>
+        <fa:ImageAwesome Name="_loader"  Icon="Refresh" Grid.ZIndex="3" Grid.Row="1" Grid.Column="0"
+                                    Grid.ColumnSpan="2" Width="50" Height="50" Spin="True" Visibility="{Binding LoaderVisibility, Mode=OneWay}"></fa:ImageAwesome>
     </Grid>
 </Window>
